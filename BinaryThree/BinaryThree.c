@@ -117,6 +117,41 @@ void postOrderTravers(Node * root) {
 	}
 }
 
+Node* FindNum(Node * root, int x)
+{
+	if (root == NULL)
+	{
+		return NULL;  // не найден
+	}
+
+	if (root->data == x)
+	{
+		return root; // нашли!!!
+	}
+
+	if (x <= root->data)
+	{
+		// left
+		if (root->left != NULL)
+			return FindNum(root->left, x); // рекурсивный поиск влево
+		else
+		{
+			return NULL; // не найден
+		}
+	}
+
+	else
+	{
+		//right
+		if (root->right != NULL)
+			return FindNum(root->right, x);// рекурсивный поиск вправо
+		else
+		{
+			return NULL; // не найден
+		}
+	}
+}
+
 int main()
 {
 	Node * Tree = NULL;
@@ -147,6 +182,19 @@ int main()
 	getch();
 	printf("\n PostOrderTravers:");
 	postOrderTravers(Tree);
+	getch();
+	int num;
+	printf("\n Input search number: ");
+	scanf("%d", &num);
+	Node * Finding = FindNum(Tree, num);
+	if (Finding == NULL)
+	{
+		printf("\n Not found");
+	}
+	else
+	{
+		printf("\n %d was found", num);
+	}
 	getch();
 	return 0;
 }
