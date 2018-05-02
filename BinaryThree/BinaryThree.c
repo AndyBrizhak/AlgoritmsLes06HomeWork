@@ -99,6 +99,24 @@ void preOrderTravers(Node * root) {
 	}
 }
 
+void inOrderTravers(Node * root) {
+	if (root) {
+		
+		inOrderTravers(root->left);
+		printf("%d ", root->data);
+		inOrderTravers(root->right);
+	}
+}
+
+void postOrderTravers(Node * root) {
+	if (root) {
+
+		postOrderTravers(root->left);
+		postOrderTravers(root->right);
+		printf("%d ", root->data);
+	}
+}
+
 int main()
 {
 	Node * Tree = NULL;
@@ -121,8 +139,14 @@ int main()
 	fclose(file);
 	printTree(Tree);
 	getch();
-	printf("\nPreOrderTravers:");
+	printf("\n PreOrderTravers:");
 	preOrderTravers(Tree);
+	getch();
+	printf("\n InOrderTravers:");
+	inOrderTravers(Tree);
+	getch();
+	printf("\n PostOrderTravers:");
+	postOrderTravers(Tree);
 	getch();
 	return 0;
 }
