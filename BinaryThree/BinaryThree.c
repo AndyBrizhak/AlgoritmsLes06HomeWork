@@ -155,7 +155,11 @@ Node* FindNum(Node * root, int x)
 int main()
 {
 	Node * Tree = NULL;
-	FILE * file = fopen("data.txt", "r");
+	char str[80];
+	printf("\n Input name of the file: ");
+	scanf("%s", str);
+	/*FILE * file = fopen("data.txt", "r");*/
+	FILE * file = fopen(str, "r");
 	if (file == NULL)
 	{
 		puts("Can't open file!");
@@ -196,6 +200,29 @@ int main()
 		printf("\n %d was found", num);
 	}
 	getch();
+	printf("\n Select path  1 - PreOrderTravers, 2-InOrderTravers, 3-PostOrderTravers : ");
+	int sel;
+	scanf("%d", &sel);
+	switch (sel) {
+	case 1:
+		printf("\n PreOrderTravers:");
+		preOrderTravers(Tree);
+		getch();
+		break;
+	case 2:
+		printf("\n InOrderTravers:");
+		inOrderTravers(Tree);
+		getch();
+		break;
+	case 3:
+		printf("\n PostOrderTravers:");
+		postOrderTravers(Tree);
+		getch();
+	default:
+		printf("\n This is not correctly digit");
+		getch();
+		break;
+	}
 	return 0;
 }
 
