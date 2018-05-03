@@ -5,11 +5,10 @@
 #include <string.h>
 
 typedef struct student {
-	int number[4];
-	char firstname[20];
-	int age[3];
-	
-	int weight[4]; 
+	int number;
+	char firstname[10];
+	int age;
+	int weight; 
 	} Student;
 
 typedef Student T;
@@ -74,7 +73,9 @@ void insert(Node ** head, Student current) {
 		{
 			exit(2); // дерево построено неправильно
 		}
+
 	}
+	free(tmpStudent);
 }
 
 void preOrderTravers(Node * root) {
@@ -85,10 +86,41 @@ void preOrderTravers(Node * root) {
 	}
 }
 
+void findAge(Node * root, int age)
+{
+	Student * tmpStudent = (Student *)malloc(sizeof(Student));
+	if (root) 
+	{
+		Student Student = root->data;
+		if (Student.age == age)
+		{
+			printf("\n Number student %d ", Student.number);
+			printf("\n Name student %s ", Student.firstname);
+			printf("\n Age student %d ", Student.age);
+			printf("\n Weight student %d ", Student.weight);
+		}
+		findAge(root->left, age);
+		findAge(root->right, age);
+	}
+	free(tmpStudent);
+}
+//
+//Student * InpStud();
+//{
+//	int age;
+//
+//	Student *tmpStudent = (Student *)malloc(sizeof(Student));
+//	printf("\n Number student %d ");
+//	scanf_s("%d ", &number);
+//
+//	return tmpStudent;
+//}
+
 
 int main()
 {
-	Student list [4] = {{ 1234, "Vasia", 20, 78},{ 1235, "Masha", 19, 50 },{ 1230, "Grusha", 18, 52 },{ 1220, "Perikl", 22, 78 }};
+	Student list [4] = { 1234, "Vasia", 20, 78, 1235, "Masha", 19, 50 , 1230, "Grusha", 18, 52, 1220, "Perikl", 22, 78 };
+
 	Node * Tree = NULL;
 	int i;
 	for (i = 0; i < 4; i++)
@@ -96,6 +128,10 @@ int main()
 	
 		insert(&Tree, list[i]);
 	}
-	 
+	int age;
+	printf("\n Input age student: ");
+	scanf_s("%d", &age);
+	findAge(Tree, age);
+	getch();
 	return 0;
 }
